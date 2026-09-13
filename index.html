@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釜山 12/1–12/6 廣安里六天五夜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2e9d8;
+    --paper-2:#e8dcc2;
+    --red:#b5482f;
+    --red-dark:#8f3624;
+    --green:#5c6f3e;
+    --green-2:#4a5a30;
+    --ink:#3a2f22;
+    --tape:#f0d97a;
+    --tape-2:#a9c7b0;
+    --line:rgba(58,47,34,0.18);
+    --highlight:#f4e07a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    line-height:1.65;
+  }
+  h1,h2,h3{ font-family:'Noto Sans TC', sans-serif; }
+  .hand{ font-family:'Caveat', cursive; }
+  a{color:var(--red);}
+
+  .tape{
+    position:absolute; width:60px; height:22px;
+    background:var(--tape); opacity:0.7;
+  }
+
+  /* ---------- STICKY NAV ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink); color:var(--paper);
+    display:flex; gap:6px; overflow-x:auto;
+    padding:10px 14px; white-space:nowrap;
+    -webkit-overflow-scrolling:touch;
+  }
+  .topnav::-webkit-scrollbar{ display:none; }
+  .topnav a{
+    color:var(--paper); text-decoration:none; font-size:12.5px; font-weight:700;
+    padding:6px 12px; border:1px solid rgba(242,233,216,0.4); border-radius:20px;
+    flex:none;
+  }
+  .topnav a:hover{ background:rgba(242,233,216,0.15); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:56vh;
+    display:flex; align-items:flex-end; overflow:hidden; color:#fffaf0;
+  }
+  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .hero-bg.mobile-bg{ display:none; }
+  .hero::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,15,10,0.05) 0%, rgba(20,15,10,0.2) 45%, rgba(20,15,10,0.78) 100%);
+    z-index:1;
+  }
+  .hero-content{ position:relative; z-index:2; padding:32px 24px 44px; width:100%; text-align:center; }
+  .hero .eyebrow{ letter-spacing:0.25em; font-size:11px; color:var(--tape); text-transform:uppercase; margin-bottom:10px; font-weight:700; }
+  .hero h1{ font-size:clamp(26px,6.5vw,44px); font-weight:900; margin:0 0 8px; line-height:1.3; text-shadow:0 2px 12px rgba(0,0,0,0.35); }
+  .hero .hand-line{ font-family:'Caveat', cursive; font-size:clamp(20px,4vw,26px); color:var(--tape); display:block; margin-top:2px; }
+  .hero p{ font-size:13.5px; color:#f2e9d8; max-width:440px; margin:10px auto 0; }
+  @media (max-width:640px){
+    .hero-bg.desktop-bg{ display:none; } .hero-bg.mobile-bg{ display:block; } .hero{ min-height:48vh; }
+  }
+
+  section{ padding:40px 18px; max-width:900px; margin:0 auto; }
+  .section-head{ text-align:center; margin-bottom:26px; }
+  .section-head .tag{ display:inline-block; font-family:'Caveat',cursive; font-size:18px; font-weight:700; color:var(--red-dark); }
+  .section-head h2{ font-size:clamp(21px,3vw,28px); margin:4px 0 0; font-weight:900; }
+
+  .band{ padding-top:4px; padding-bottom:4px; }
+  .band-cream{ background:#f2e9d8; }
+  .band-olive{ background:#e3e0c4; }
+  .band-red{ background:#e9cdbf; }
+  .band-teal{ background:#cfe0d6; }
+
+  /* ---------- HOTEL CAROUSEL ---------- */
+  .hotel-card{
+    background:#fffdf8; border:1px solid #d8cba8;
+    padding:14px 14px 18px; position:relative;
+    display:flex; flex-direction:column;
+  }
+  .img-slot{
+    aspect-ratio:4/3; background:repeating-linear-gradient(135deg, #efe4d0, #efe4d0 8px, #f7f0e0 8px, #f7f0e0 16px);
+    border:1px solid #e2d4ae; display:flex; align-items:center; justify-content:center;
+    color:#a9927a; font-size:12.5px; text-align:center; padding:12px; margin-bottom:12px;
+  }
+  .hotel-body{ padding:0 4px 4px; flex:1; display:flex; flex-direction:column; }
+  .hotel-body h3{ font-size:17px; margin:0 0 6px; font-weight:700; }
+  .status{ display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:10px; width:fit-content; }
+  .status.check{ background:#f6e4c4; color:#8a5a1f; }
+  .status.closed{ background:#f2d9d2; color:var(--red-dark); }
+  .hotel-body p{ font-size:13px; margin:0 0 8px; color:#5c4d38; }
+  .hotel-body .feat{ font-size:12.5px; color:var(--green-2); font-weight:700; }
+  .hotel-body a.link{ margin-top:auto; font-size:12.5px; color:var(--red); }
+
+  .carousel{ max-width:400px; margin:0 auto; position:relative; }
+  .carousel-track{ overflow:hidden; }
+  .carousel-slides{ display:flex; transition:transform 0.3s ease; }
+  .carousel-slides .hotel-card{ flex:0 0 100%; }
+  .carousel-nav{ display:flex; align-items:center; justify-content:center; gap:16px; margin-top:14px; }
+  .carousel-btn{ width:34px; height:34px; border-radius:50%; border:2px solid var(--ink); background:#fffdf8; cursor:pointer; font-size:14px; color:var(--ink); display:flex; align-items:center; justify-content:center; }
+  .carousel-btn:hover{ background:var(--highlight); }
+  .carousel-count{ font-family:'Caveat',cursive; font-size:18px; color:var(--red-dark); min-width:40px; text-align:center; }
+
+  /* ---------- NOTE CARDS (map legend / notes / apps) ---------- */
+  .note-grid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+  .note-card{ background:#fffdf8; border:1px solid #d8cba8; padding:16px 18px; }
+  .note-card h4{ margin:0 0 8px; font-size:14.5px; color:var(--red-dark); font-weight:700; }
+  .note-card p, .note-card li{ font-size:13px; color:#5c4d38; }
+  .note-card ul{ margin:0; padding-left:16px; }
+
+  .app-card{ text-align:left; }
+  .app-icon{ width:40px; height:40px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; border:2px solid var(--ink); }
+  .app-head{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  .app-card h4{ margin:0; }
+  .app-card p{ margin:8px 0 10px; }
+  .store-btn{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--ink); border:1.5px solid var(--ink); padding:5px 12px; text-decoration:none; }
+  .store-btn:hover{ background:var(--highlight); }
+  .store-btn.disabled{ color:#a9927a; border-style:dashed; border-color:#a9927a; }
+
+  /* ---------- ITINERARY (tabs) ---------- */
+  .day-tabs{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:22px; -webkit-overflow-scrolling:touch; }
+  .day-tab-btn{
+    flex:none; font-family:'Noto Sans TC',sans-serif; font-weight:700; font-size:13px;
+    background:#fffdf8; border:2px solid var(--ink); padding:8px 14px; cursor:pointer; color:var(--ink);
+  }
+  .day-tab-btn.active{ background:var(--red); color:#fffaf0; }
+  .day-panel{ display:none; }
+  .day-panel.active{ display:block; }
+  .day{ background:#fffdf8; border:1px solid #d8cba8; padding:20px 20px 12px; }
+  .day h3{ margin:0 0 2px; font-size:18px; font-weight:900; color:var(--green-2); }
+  .day .date{ font-family:'Caveat',cursive; font-size:16px; color:var(--red); margin-bottom:12px; }
+  .stop{ display:grid; grid-template-columns:64px 1fr; gap:12px; padding:10px 0; border-top:1px dashed var(--line); }
+  .stop:first-of-type{ border-top:none; }
+  .stop .time{ font-size:12px; color:var(--red-dark); font-weight:700; padding-top:2px; }
+  .stop .name{ font-weight:700; font-size:14px; color:var(--ink); }
+  .stop .note{ font-size:12.5px; color:#6b5c46; margin-top:2px; }
+  .stop .note.warn{ color:var(--red-dark); font-weight:700; }
+
+  /* ---------- BUDGET ---------- */
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; background:#fffdf8; }
+  th,td{ padding:10px 10px; border-bottom:1px dashed var(--line); text-align:left; }
+  th{ font-weight:700; color:var(--green-2); font-size:12.5px; border-bottom:2px solid var(--ink); }
+  tr:last-child td{ border-bottom:none; }
+  .budget-note{ font-size:12px; color:#6b5c46; margin-top:14px; }
+  .totalbar{ margin-top:20px; background:var(--red); color:#fffaf0; padding:14px 18px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:13.5px; }
+  .totalbar b{ font-family:'Caveat',cursive; font-size:20px; color:var(--tape); }
+
+  /* ---------- NAVER MAP STEPS ---------- */
+  .steps{ counter-reset:step; }
+  .step{ display:flex; gap:14px; padding:14px 0; border-top:1px dashed var(--line); }
+  .step:first-child{ border-top:none; }
+  .step .num{ counter-increment:step; flex:none; width:28px; height:28px; border-radius:50%; background:var(--tape); border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; color:var(--ink); }
+  .step .num::before{ content: counter(step); }
+  .step .txt h4{ margin:0 0 4px; font-size:14px; color:var(--green-2); font-weight:700; }
+  .step .txt p{ margin:0; font-size:13px; color:#5c4d38; }
+
+  footer{ text-align:center; padding:32px 20px 48px; color:#8a7355; font-family:'Caveat',cursive; font-size:16px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="#hotels">飯店</a>
+  <a href="#map">地圖</a>
+  <a href="#itinerary">行程</a>
+  <a href="#budget">費用</a>
+  <a href="#pocketlist">口袋名單</a>
+  <a href="#notes">注意事項</a>
+  <a href="#apps">APP</a>
+  <a href="#navermap">Naver教學</a>
+</nav>
+
+<header class="hero">
+  <img class="hero-bg desktop-bg" src="https://images.unsplash.com/photo-1676290968796-daf4ea0d8526?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="廣安里海邊">
+  <img class="hero-bg mobile-bg" src="https://images.unsplash.com/photo-1642307106502-593eac711f3d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="廣安里海邊">
+  <div class="hero-content">
+    <div class="eyebrow">Busan Travel Diary</div>
+    <h1>廣安里六天五夜<span class="hand-line">12/1（二）— 12/6（日）</span></h1>
+    <p>三人一室・分區慢遊・週六無人機秀壓軸</p>
+  </div>
+</header>
+
+<div class="band band-cream">
+<section id="hotels">
+  <div class="section-head"><div class="tag">Hotel Shortlist</div><h2>飯店候選三間</h2></div>
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slides" id="hotelSlides">
+        <div class="hotel-card">
+          <div class="img-slot" style="padding:0; background:#000;">
+            <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/472781898.jpg?k=9a90c393c082f80109267acc22f090aaf13b4d757eedabdf8858dcf1485d19f8&o=" alt="Gwanganli The Club Hotel" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div class="hotel-body">
+            <span class="status check">待確認房況</span>
+            <h3>Gwanganli The Club Hotel（더클럽호텔）</h3>
+            <p>廣安里在地飯店，先前研究時列在候選名單中，實際房型、價格待查。</p>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="img-slot" style="padding:0; background:#000;">
+            <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/592868169.jpg?k=4df5c67871970fe3be1ff2defd31398227322b56099f2436c013a0b32d6383e6&o=" alt="BAMU Hotel" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div class="hotel-body">
+            <span class="status check">狀態待確認（見下方說明）</span>
+            <h3>BAMU Hotel</h3>
+            <p>先前查證這間官網訂房功能無法使用；這張照片來自 Booking.com 圖床連結，狀態可能已經改變，需要重新確認房況與訂房管道。</p>
+            <a class="link" href="https://www.bamuhotel.com/en/" target="_blank">官網 ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="moveHotel(-1)">‹</button>
+      <span class="carousel-count" id="hotelCount">1 / 2</span>
+      <button class="carousel-btn" onclick="moveHotel(1)">›</button>
+    </div>
+  </div>
+  <p class="budget-note" style="text-align:center;">三間目前都還沒有確認12月份實際房況與價格，出發前建議在 Agoda／Booking 上用韓文原名再查一次。</p>
+</section>
+</div>
+
+<div class="band band-olive">
+<section id="map">
+  <div class="section-head"><div class="tag">Region Guide</div><h2>釜山區域地圖</h2></div>
+  <p style="text-align:center; font-size:12.5px; color:#5c5a3e; margin-top:-16px; margin-bottom:20px;">真實地圖上標出六個分區，編號跟下方卡片互相對照</p>
+
+  <div style="max-width:460px; margin:0 auto 6px; position:relative; border:2px solid var(--ink);">
+    <img src="https://staticmap.openstreetmap.de/staticmap.php?center=35.138,129.097&zoom=11&size=700x700&maptype=mapnik" alt="釜山區域真實地圖" style="width:100%; display:block;">
+    <div style="position:absolute; left:75.1%; top:23.0%; transform:translate(-50%,-50%);">
+      <div style="width:30px; height:30px; border-radius:50%; background:#a9c7b0; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">1</div>
+    </div>
+    <div style="position:absolute; left:63.3%; top:44.7%; transform:translate(-50%,-50%);">
+      <div style="width:32px; height:32px; border-radius:50%; background:#e6b98f; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">2</div>
+    </div>
+    <div style="position:absolute; left:42.3%; top:44.9%; transform:translate(-50%,-50%);">
+      <div style="width:30px; height:30px; border-radius:50%; background:#f4e07a; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">3</div>
+    </div>
+    <div style="position:absolute; left:54.6%; top:46.2%; transform:translate(-50%,-50%);">
+      <div style="width:30px; height:30px; border-radius:50%; background:#e8a9a3; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">4</div>
+    </div>
+    <div style="position:absolute; left:36.3%; top:60.5%; transform:translate(-50%,-50%);">
+      <div style="width:28px; height:28px; border-radius:50%; background:#c9b8dc; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">5</div>
+    </div>
+    <div style="position:absolute; left:44.6%; top:65.0%; transform:translate(-50%,-50%);">
+      <div style="width:28px; height:28px; border-radius:50%; background:#f0c98f; border:2px solid #3a2f22; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:#3a2f22; box-shadow:0 1px 4px rgba(0,0,0,0.3);">6</div>
+    </div>
+  </div>
+  <p style="text-align:center; font-size:11px; color:#8a7355; margin-bottom:8px;">底圖：© OpenStreetMap contributors（staticmap.openstreetmap.de），標記位置依各區實際經緯度換算</p>
+
+  <div class="note-grid">
+    <div class="note-card"><h4>① 기장 機張（Day2可選）</h4><p>Skyline Luge 斜坡滑車，這次先不排，時間留給其他天。</p></div>
+    <div class="note-card"><h4>② 해운대 海雲台（Day2）</h4><p>EGG DROP・天空膠囊列車・清沙浦海鮮・해운대암소갈비집</p></div>
+    <div class="note-card"><h4>③ 서면 西面（Day3）</h4><p>醫美・購物・부전시장買阿珠媽花背心</p></div>
+    <div class="note-card"><h4>④ 광안리 廣安里（Day1・Day5晚・Day6）</h4><p>豬肉湯飯・汗蒸幕・週六19:00／21:00無人機秀・早餐로옹브런치／海景咖啡廳</p></div>
+    <div class="note-card"><h4>⑤ 남포동 南浦洞＋송도 松島（Day4）</h4><p>자갈치・신동아시장・국제시장寢具店・松島纜車・BIFF夜市晚餐</p></div>
+    <div class="note-card"><h4>⑥ 영도 影島（Day5）</h4><p>Momos Coffee 影島店・太宗台，晚上趕回廣安里看秀</p></div>
+  </div>
+  <p class="budget-note" style="text-align:center;">實際路線建議搭配 Naver Map 導航；示意圖跟卡片的編號互相對照，方便一眼看出每個區域要做什麼。</p>
+</section>
+</div>
+
+<div class="band band-cream">
+<section id="itinerary">
+  <div class="section-head"><div class="tag">Day by Day</div><h2>逐日行程</h2></div>
+
+  <div class="day-tabs" id="dayTabs">
+    <button class="day-tab-btn active" data-day="1">Day1・12/1</button>
+    <button class="day-tab-btn" data-day="2">Day2・12/2</button>
+    <button class="day-tab-btn" data-day="3">Day3・12/3</button>
+    <button class="day-tab-btn" data-day="4">Day4・12/4</button>
+    <button class="day-tab-btn" data-day="5">Day5・12/5</button>
+    <button class="day-tab-btn" data-day="6">Day6・12/6</button>
+  </div>
+
+  <div class="day-panel active" data-day="1">
+    <div class="day">
+      <h3>廣安里入住日</h3><div class="date">12/1（二）</div>
+      <div class="stop"><div class="time">下午</div><div><div class="name">抵達釜山・飯店 Check-in</div><div class="note">以廣安里為據點，放行李</div></div></div>
+      <div class="stop"><div class="time">傍晚</div><div><div class="name">廣安里海邊散步</div><div class="note">熟悉環境，先看一眼廣安大橋</div></div></div>
+      <div class="stop"><div class="time">晚餐</div><div><div class="name">豬肉湯飯（數選一）</div><div class="note">수영돼지국밥／수변최고돼지국밥／광안제일돼지국밥（24h）／엄용백돼지국밥</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-panel" data-day="2">
+    <div class="day">
+      <h3>海雲台</h3><div class="date">12/2（三）</div>
+      <div class="stop"><div class="time">早餐</div><div><div class="name">EGG DROP 海雲台店</div><div class="note">厚蛋吐司，順路吃完再去搭膠囊列車</div></div></div>
+      <div class="stop"><div class="time">上午</div><div><div class="name">天空膠囊列車（尾浦→清沙浦）</div><div class="note warn">須提前預約，這週的票 11/3（二）07:00 開賣</div></div></div>
+      <div class="stop"><div class="time">中午</div><div><div class="name">清沙浦海鮮午餐</div><div class="note">下車步行約4-5分鐘可達餐廳聚集區</div></div></div>
+      <div class="stop"><div class="time">下午</div><div><div class="name">海雲台傳統市場・海邊散步</div><div class="note">機張 Skyline Luge 這次先不排，時間留給後面幾天</div></div></div>
+      <div class="stop"><div class="time">晚餐</div><div><div class="name">해운대암소갈비집（海雲台母牛肋排家）</div><div class="note">1964年老字號，해운대해변로333，11:30–22:00</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-panel" data-day="3">
+    <div class="day">
+      <h3>西面</h3><div class="date">12/3（四）</div>
+      <div class="stop"><div class="time">早餐</div><div><div class="name">로옹 브런치（Ro_ong Brunch）</div><div class="note">수영구 광안로48번길7，8:30開門，CIA廚藝學院主廚</div></div></div>
+      <div class="stop"><div class="time">上午</div><div><div class="name">西面 醫美行程</div><div class="note">西面為診所密集區，實際診所待自行鎖定</div></div></div>
+      <div class="stop"><div class="time">中午</div><div><div class="name">西面購物</div><div class="note">順路逛街小店</div></div></div>
+      <div class="stop"><div class="time">下午</div><div><div class="name">부전시장（Bujeon Market）買阿珠媽花背心</div><div class="note">離西面很近，同一個大商圈，順路逛</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-panel" data-day="4">
+    <div class="day">
+      <h3>南浦洞</h3><div class="date">12/4（五）</div>
+      <div class="stop"><div class="time">早餐</div><div><div class="name">로옹 브런치（Ro_ong Brunch）</div><div class="note">同上，8:30開門，方便早出發</div></div></div>
+      <div class="stop"><div class="time">上午</div><div><div class="name">자갈치市場＋신동아시장</div><div class="note">兩者同一棟建築群，走路互通，不用另排交通</div></div></div>
+      <div class="stop"><div class="time">中午</div><div><div class="name">국제시장（國際市場）逛寢具店</div><div class="note">推薦選購四季被，就在자갈치附近</div></div></div>
+      <div class="stop"><div class="time">下午</div><div><div class="name">松島纜車（水晶車廂）</div><div class="note">자갈치站搭6/26/30/71路公車約20分鐘可達</div></div></div>
+      <div class="stop"><div class="time">傍晚</div><div><div class="name">BIFF廣場・南浦洞夜市小吃</div><div class="note">順路吃晚餐</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-panel" data-day="5">
+    <div class="day">
+      <h3>影島＋無人機秀</h3><div class="date">12/5（六）</div>
+      <div class="stop"><div class="time">早餐</div><div><div class="name">로옹 브런치（Ro_ong Brunch）</div><div class="note">同上，這天需要早出發，最後點餐平日2:30前</div></div></div>
+      <div class="stop"><div class="time">上午</div><div><div class="name">過影島大橋・Momos Coffee 影島店</div><div class="note">봉래나루로160，過橋後第一個聚落，順路不繞</div></div></div>
+      <div class="stop"><div class="time">中午～下午</div><div><div class="name">太宗台</div><div class="note warn">燈塔、斷崖海景、環山循環列車、烤貝街，這天行程較滿，注意抓時間趕回廣安里</div></div></div>
+      <div class="stop"><div class="time">晚餐</div><div><div class="name">回廣安里簡單用餐</div><div class="note">影島回廣安里車程需抓40-60分鐘</div></div></div>
+      <div class="stop"><div class="time">19:00</div><div><div class="name">無人機秀 第一場</div><div class="note">廣安里海水浴場，免費，冬季場次</div></div></div>
+      <div class="stop"><div class="time">21:00</div><div><div class="name">無人機秀 第二場（可選）</div><div class="note">同主題重播一次</div></div></div>
+    </div>
+  </div>
+
+  <div class="day-panel" data-day="6">
+    <div class="day">
+      <h3>賦歸</h3><div class="date">12/6（日）</div>
+      <div class="stop"><div class="time">早餐</div><div><div class="name">쿠타팜 테라스 광안리점 或 레인즈</div><div class="note">廣安里海邊第一排，10:00開門，正面看廣安大橋，這天不趕時間可以悠閒吃</div></div></div>
+      <div class="stop"><div class="time">上午</div><div><div class="name">汗蒸幕（數選一）</div><div class="note">광안찜질사우나（在地小規模）／호텔아쿠아펠리스（海景大型、24h），退房前放鬆一下</div></div></div>
+      <div class="stop"><div class="time">中午</div><div><div class="name">退房・機動時間</div><div class="note">視航班安排最後採買</div></div></div>
+      <div class="stop"><div class="time">視航班</div><div><div class="name">機場</div><div class="note">結束行程</div></div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="band band-red">
+<section id="budget">
+  <div class="section-head"><div class="tag">Budget</div><h2>費用參考</h2></div>
+  <table>
+    <tr><th>項目</th><th>參考金額</th><th>備註</th></tr>
+    <tr><td>住宿</td><td>約 6,000 TWD／晚（三人一室）</td><td>目標預算，三間候選飯店價格待確認</td></tr>
+    <tr><td>松島纜車（水晶車廂）</td><td>來回 22,000 KRW／人</td><td>持 Visit Busan Pass 可免費兌換</td></tr>
+    <tr><td>天空膠囊列車</td><td>依路線與時段而定</td><td>另外預約購票，不含在通行證內</td></tr>
+    <tr><td>汗蒸幕</td><td>約 12,000–30,000 KRW／人</td><td>視選擇小規模或海景大型款而定</td></tr>
+    <tr><td>Visit Busan Pass（BIG3）</td><td>約 1,050 TWD 上下</td><td>目前僅電子版可買，實體卡暫停銷售</td></tr>
+    <tr><td>無人機秀</td><td>免費</td><td>廣安里海水浴場，無需預約</td></tr>
+  </table>
+  <div class="totalbar"><span>三人房費（六晚估算）</span><b>約 36,000 TWD 上下</b></div>
+  <p class="budget-note">以上金額為抓取現有查證資料的估算值，實際會依匯率、淡旺季與最終選定的店家有所變動，出發前建議再核對一次。</p>
+</section>
+</div>
+
+<div class="band band-cream">
+<section id="pocketlist">
+  <div class="section-head"><div class="tag">Backup Options</div><h2>口袋名單</h2></div>
+  <p style="text-align:center; font-size:12.5px; color:#5c5a3e; margin-top:-16px; margin-bottom:20px;">還沒排進固定行程，哪天時間多、或想換掉某一餐時可以從這裡挑。編號對照上面的分區地圖。</p>
+  <div class="note-grid">
+    <div class="note-card"><h4>③ 西面／田浦</h4><ul><li>덴바 denba（田浦）</li><li>이재모피자 李在模披薩（已排進 Day3 候補）</li><li>제주가 서면 濟州家</li></ul></div>
+    <div class="note-card"><h4>④ 廣安里</h4><ul><li>Working Holiday</li><li>All Sunday Bagel</li><li>83 Haechi</li><li>수변최고돼지국밥（已排進 Day1 候補）</li><li>이박사 생종이오겹</li></ul></div>
+    <div class="note-card"><h4>② 海雲台</h4><ul><li>BRONI</li><li>Who's Who MUMU Bakery</li><li>거대곰탕 巨大牛骨湯</li><li>초필살돼지구이 超必殺烤豬皮</li><li>호랑이젤라떡</li><li>해운대명품호떡</li></ul></div>
+    <div class="note-card"><h4>⑤ 札嘎其</h4><ul><li>보배상회 Bobae Seafood 85.87</li></ul></div>
+    <div class="note-card"><h4>門峴洞（未編號區域）</h4><ul><li>대구돼지국밥</li></ul><p style="margin-top:8px; font-size:11.5px; color:#8a7355;">不在前面六個分區範圍內，離廣安里／水營一帶較近。</p></div>
+  </div>
+  <p class="budget-note" style="text-align:center;">這份清單直接從朋友分享的推薦整理過來，地址、營業時間還沒一一查證，排進行程前建議先用 Naver Map 確認現況。</p>
+</section>
+</div>
+
+<div class="band band-teal">
+<section id="notes">
+  <div class="section-head"><div class="tag">Before You Go</div><h2>注意事項</h2></div>
+  <div class="note-grid">
+    <div class="note-card"><h4>插座與電源</h4><ul><li>韓國插座為圓腳規格，跟台灣不同，建議自備轉接頭</li><li>吹風機、電捲棒等高功率電器出發前先確認是否支援220V</li><li>行動電源需隨身攜帶，不可託運或放行李架</li></ul></div>
+    <div class="note-card"><h4>交通提醒</h4><ul><li>下班尖峰時段建議改搭地鐵，計程車容易塞車</li><li>膠囊列車務必提前預約，現場也有少量票但容易被搶完</li><li>12/5影島回廣安里車程較長（約40-60分鐘），記得抓時間趕晚上的無人機秀</li></ul></div>
+    <div class="note-card"><h4>天氣與臨時異動</h4><ul><li>無人機秀遇雨或強風可能取消或延期，出發前一天上官網確認</li><li>12月釜山夜晚偏冷，晚上看秀建議多帶保暖衣物</li></ul></div>
+    <div class="note-card"><h4>現金與支付</h4><ul><li>部分小吃店、傳統市場攤位不一定收卡，建議隨身備少量現金</li><li>WOWPASS 之類的多功能卡可當交通卡＋付款卡使用</li></ul></div>
+  </div>
+</section>
+</div>
+
+<div class="band band-cream">
+<section id="apps">
+  <div class="section-head"><div class="tag">Apps</div><h2>行程必備 APP</h2></div>
+  <div class="note-grid">
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#03c75a;">🗺️</div><h4>Naver Map</h4></div>
+      <p>韓國在地地圖，精準度比 Google Map 高，找路、查公車、查地鐵轉乘都靠它。</p>
+      <a class="store-btn" href="https://apps.apple.com/kr/app/%EB%84%A4%EC%9D%B4%EB%B2%84%EC%A7%80%EB%8F%84-%EC%9E%A5%EC%86%8C%EC%9D%98-%EB%B0%9C%EA%B2%AC%EA%B3%BC-%EC%98%88%EC%95%BD-%EB%82%B4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98/id311867728" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#03c75a;">🌐</div><h4>Papago</h4></div>
+      <p>Naver出的翻譯App，中韓翻譯比一般翻譯軟體準確，拍照翻菜單、路牌很方便。</p>
+      <a class="store-btn" href="https://apps.apple.com/us/app/naver-papago-ai-translator/id1147874819" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#f9d900; color:#3c1e1e;">🚕</div><h4>Kakao T</h4></div>
+      <p>韓國最主流的叫車App，尖峰時段路上塞車嚴重時可以搭配地鐵交替使用。</p>
+      <a class="store-btn" href="https://apps.apple.com/kr/app/%EC%B9%B4%EC%B9%B4%EC%98%A4-t-%ED%83%9D%EC%8B%9C-%EB%8C%80%EB%A6%AC-%EC%A3%BC%EC%B0%A8-%EB%B0%94%EC%9D%B4%ED%81%AC-%ED%95%AD%EA%B3%B5-%ED%80%B5/id981110422" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#ff7a59;">💳</div><h4>WOWPASS</h4></div>
+      <p>可當交通卡＋付款卡，也能存錢、提領台幣，出發前先下載App，到當地機台開卡。</p>
+      <a class="store-btn" href="https://apps.apple.com/us/app/wowpass-go-cashless-in-korea/id1626691440" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#1b2a4a;">🎫</div><h4>Visit Busan Pass</h4></div>
+      <p>若有買通行證，下載這個App登錄卡號同步，進景點出示App內QR Code。記得選電子版，實體卡目前暫停銷售。</p>
+      <a class="store-btn" href="https://apps.apple.com/tw/app/visit-busan-pass/id1665823358" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#3f8f86;">🍽️</div><h4>캐치테이블 Catch Table</h4></div>
+      <p>韓國許多餐廳用這個做現場排隊或遠端候位，建議出發前先在台灣下載並註冊好帳號。</p>
+      <a class="store-btn" href="https://apps.apple.com/us/app/%EC%BA%90%EC%B9%98%ED%85%8C%EC%9D%B4%EB%B8%94/id1485193566" target="_blank">App Store ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#25395c;">🚋</div><h4>블루라인파크（膠囊列車訂票）</h4></div>
+      <p>沒有獨立App，需透過官網訂票。這週（11/30–12/6）的票 <strong>11/3（二）07:00</strong> 開賣。</p>
+      <a class="store-btn disabled" href="https://www.bluelinepark.com/booking.do" target="_blank">官網訂票 ↗</a>
+    </div>
+    <div class="note-card app-card">
+      <div class="app-head"><div class="app-icon" style="background:#8a7c6d;">🧳</div><h4>地鐵置物櫃查詢</h4></div>
+      <p>可查全韓國地鐵站置物櫃即時空位跟尺寸，App名稱依地區版本可能不同，建議到當地App Store搜尋「지하철 물품보관함」確認。</p>
+      <span class="store-btn disabled">連結待確認</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="band band-olive">
+<section id="navermap">
+  <div class="section-head"><div class="tag">Local Tool</div><h2>Naver Map 使用方式</h2></div>
+  <div class="steps">
+    <div class="step"><div class="num"></div><div class="txt"><h4>出發前先下載好</h4><p>韓國在地地圖精準度比 Google Map 高，尤其是巷弄地址、公車路線幾乎都要靠它。介面可切換英文。</p></div></div>
+    <div class="step"><div class="num"></div><div class="txt"><h4>搜尋地點</h4><p>可直接貼中文店名或韓文原名搜尋，找到後點選地點會顯示營業時間、電話、實景照片。</p></div></div>
+    <div class="step"><div class="num"></div><div class="txt"><h4>查地鐵轉乘</h4><p>點選地鐵路線，會顯示哪一節車廂離出口／轉乘電梯最近，也能查到末班車時間。</p></div></div>
+    <div class="step"><div class="num"></div><div class="txt"><h4>公車路線</h4><p>搜尋起訖點後選擇大眾運輸，會列出公車號碼、預估到站時間與步行接駁路線。</p></div></div>
+    <div class="step"><div class="num"></div><div class="txt"><h4>離線使用</h4><p>行前可在有網路時先把常去的區域地圖快取，避免現場網路不穩找不到路。</p></div></div>
+  </div>
+</section>
+</div>
+
+<footer>釜山 12/1–12/6 廣安里行程 · 內容持續更新中</footer>
+
+<script>
+  let hotelIndex = 0;
+  const hotelTotal = 2;
+  function moveHotel(dir){
+    hotelIndex = (hotelIndex + dir + hotelTotal) % hotelTotal;
+    document.getElementById('hotelSlides').style.transform = `translateX(-${hotelIndex * 100}%)`;
+    document.getElementById('hotelCount').textContent = `${hotelIndex + 1} / ${hotelTotal}`;
+  }
+  document.getElementById('dayTabs').addEventListener('click', function(e){
+    if(!e.target.classList.contains('day-tab-btn')) return;
+    const day = e.target.getAttribute('data-day');
+    document.querySelectorAll('.day-tab-btn').forEach(b => b.classList.toggle('active', b === e.target));
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', p.getAttribute('data-day') === day));
+  });
+</script>
+
+</body>
+</html>
