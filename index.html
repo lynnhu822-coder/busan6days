@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>釜山六天五夜 12/1–12/6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#ffffff;
@@ -62,12 +62,19 @@
     z-index:1;
   }
   .hero-content{ position:relative; z-index:2; padding:32px 24px 44px; width:100%; text-align:center; }
+  .hero-content-mobile{ display:none; }
   .hero .eyebrow{ letter-spacing:0.25em; font-size:11px; color:var(--gold); text-transform:uppercase; margin-bottom:10px; font-weight:700; }
   .hero h1{ font-size:clamp(26px,6.5vw,44px); font-weight:900; margin:0 0 8px; line-height:1.3; text-shadow:0 2px 12px rgba(0,0,0,0.35); }
   .hero .hand-line{ font-family:'Caveat', cursive; font-size:clamp(20px,4vw,26px); color:var(--gold); display:block; margin-top:2px; }
   .hero p{ font-size:13.5px; color:#f2e9d8; max-width:440px; margin:10px auto 0; }
   @media (max-width:640px){
     .hero-bg.desktop-bg{ display:none; } .hero-bg.mobile-bg{ display:block; } .hero{ min-height:92vh; }
+    .hero-content{ display:none; }
+    .hero-content-mobile{ display:block; position:absolute; inset:0; z-index:2; }
+    .busan-block{ position:absolute; left:16px; top:32px; display:flex; flex-direction:column; }
+    .busan-vertical{ display:flex; flex-direction:column; font-family:'Playfair Display',serif; font-weight:900; font-size:15vw; line-height:0.82; color:#fffaf0; text-shadow:0 2px 16px rgba(0,0,0,0.45); }
+    .busan-date{ margin-top:10px; font-size:11px; letter-spacing:0.22em; color:var(--gold); font-family:'Noto Sans TC',sans-serif; }
+    .hero-quote{ position:absolute; right:22px; left:22px; bottom:36px; text-align:right; font-family:'Playfair Display',serif; font-style:italic; font-weight:500; font-size:17px; line-height:1.45; color:#fffaf0; text-shadow:0 2px 10px rgba(0,0,0,0.45); }
   }
 
   section{ padding:40px 18px; max-width:900px; margin:0 auto; }
@@ -190,7 +197,6 @@
   <a href="#pocketlist">口袋名單</a>
   <a href="#notes">注意事項</a>
   <a href="#apps">APP</a>
-  <a href="#navermap">Naver教學</a>
 </nav>
 
 <header class="hero">
@@ -199,6 +205,13 @@
   <div class="hero-content">
     <div class="eyebrow">Busan Travel Diary</div>
     <h1>釜山六天五夜<span class="hand-line">12/1（二）— 12/6（日）</span></h1>
+  </div>
+  <div class="hero-content-mobile">
+    <div class="busan-block">
+      <div class="busan-vertical"><span>B</span><span>U</span><span>S</span><span>A</span><span>N</span></div>
+      <div class="busan-date">2026/12/1—2026/12/6</div>
+    </div>
+    <div class="hero-quote">This is for all my ladies<br>who don't get hyped enough</div>
   </div>
 </header>
 
@@ -491,6 +504,15 @@
       <div class="card-body">
       <p>韓國在地地圖，精準度比 Google Map 高，找路、查公車、查地鐵轉乘都靠它。</p>
       <a class="store-btn" href="https://apps.apple.com/kr/app/%EB%84%A4%EC%9D%B4%EB%B2%84%EC%A7%80%EB%8F%84-%EC%9E%A5%EC%86%8C%EC%9D%98-%EB%B0%9C%EA%B2%AC%EA%B3%BC-%EC%98%88%EC%95%BD-%EB%82%B4%EB%B9%84%EA%B2%8C%EC%9D%B4%EC%85%98/id311867728" target="_blank">App Store ↗</a>
+      <ul style="margin-top:12px;">
+        <li><strong>出發前先下載好</strong>：介面可切換英文，巷弄地址、公車路線幾乎都要靠它</li>
+        <li><strong>搜尋地點</strong>：貼中文店名或韓文原名搜尋，會顯示營業時間、電話、實景照片</li>
+        <li><strong>查地鐵轉乘</strong>：點選路線會顯示哪一節車廂離出口/轉乘電梯最近，也能查末班車時間</li>
+        <li><strong>公車路線</strong>：搜起訖點選大眾運輸，會列出公車號碼、預估到站時間與步行接駁</li>
+        <li><strong>離線使用</strong>：行前先把常去區域地圖快取，避免現場網路不穩</li>
+        <li><strong>找廁所</strong>：搜尋「TOILET」或「공용화장실」直接找附近公共廁所</li>
+        <li><strong>避開樓梯</strong>：規劃路線可設定「排除樓梯」，拖行李時很實用</li>
+      </ul>
       </div>
     </details>
     <details class="note-card app-card">
@@ -542,21 +564,6 @@
       <span class="store-btn disabled">連結待確認</span>
       </div>
     </details>
-  </div>
-</section>
-</div>
-
-<div class="band band-olive">
-<section id="navermap">
-  <div class="section-head"><div class="tag">Local Tool</div><h2>Naver Map 使用方式</h2></div>
-  <div class="steps">
-    <div class="step"><div class="num"></div><div class="txt"><h4>出發前先下載好</h4><p>韓國在地地圖精準度比 Google Map 高，尤其是巷弄地址、公車路線幾乎都要靠它。介面可切換英文。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>搜尋地點</h4><p>可直接貼中文店名或韓文原名搜尋，找到後點選地點會顯示營業時間、電話、實景照片。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>查地鐵轉乘</h4><p>點選地鐵路線，會顯示哪一節車廂離出口／轉乘電梯最近，也能查到末班車時間。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>公車路線</h4><p>搜尋起訖點後選擇大眾運輸，會列出公車號碼、預估到站時間與步行接駁路線。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>離線使用</h4><p>行前可在有網路時先把常去的區域地圖快取，避免現場網路不穩找不到路。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>找廁所</h4><p>搜尋「TOILET」或「공용화장실」可以直接找到附近的公共廁所，很實用。</p></div></div>
-    <div class="step"><div class="num"></div><div class="txt"><h4>避開樓梯</h4><p>規劃路線時可以設定「排除樓梯」，拖行李或扛戰利品時走路線會自動避開有樓梯的路段。</p></div></div>
   </div>
 </section>
 </div>
