@@ -242,6 +242,7 @@
     <div class="countdown-block"><div class="val" id="cdDays">--</div><div class="lbl">天</div></div>
     <div class="countdown-block"><div class="val" id="cdHours">--</div><div class="lbl">時</div></div>
     <div class="countdown-block"><div class="val" id="cdMins">--</div><div class="lbl">分</div></div>
+    <div class="countdown-block"><div class="val" id="cdSecs">--</div><div class="lbl">秒</div></div>
   </div>
 </div>
 
@@ -614,12 +615,14 @@
     const days = Math.floor(diffMs / 86400000);
     const hours = Math.floor((diffMs % 86400000) / 3600000);
     const mins = Math.floor((diffMs % 3600000) / 60000);
+    const secs = Math.floor((diffMs % 60000) / 1000);
     document.getElementById('cdDays').textContent = String(days).padStart(2,'0');
     document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
     document.getElementById('cdMins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cdSecs').textContent = String(secs).padStart(2,'0');
   }
   updateCountdown();
-  setInterval(updateCountdown, 30000);
+  setInterval(updateCountdown, 1000);
   document.getElementById('dayTabs').addEventListener('click', function(e){
     if(!e.target.classList.contains('day-tab-btn')) return;
     const day = e.target.getAttribute('data-day');
