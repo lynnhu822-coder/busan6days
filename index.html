@@ -51,7 +51,7 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    position:relative; min-height:56vh;
+    position:relative; min-height:70vh;
     display:flex; align-items:flex-end; overflow:hidden; color:#fffaf0;
   }
   .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; z-index:0; }
@@ -189,6 +189,23 @@
   .step .txt p{ margin:0; font-size:13px; color:#5c4d38; }
 
   footer{ text-align:center; padding:32px 20px 48px; color:#8a7355; font-family:'Caveat',cursive; font-size:16px; }
+
+  .countdown-wrap{ background:var(--paper); padding:20px 0; text-align:center; }
+  .countdown-title{ font-size:12px; color:var(--ink-soft); margin-bottom:10px; }
+  .countdown-blocks{ display:flex; justify-content:center; gap:10px; }
+  .countdown-block{ display:flex; flex-direction:column; align-items:center; }
+  .countdown-block .val{
+    background:#1a1a1a; color:#ffffff;
+    font-family:'Playfair Display',serif; font-weight:900; font-size:28px;
+    width:60px; height:60px; display:flex; align-items:center; justify-content:center;
+    border-radius:4px;
+    position:relative;
+  }
+  .countdown-block .val::after{
+    content:''; position:absolute; left:0; right:0; top:50%;
+    height:1px; background:rgba(255,255,255,0.15);
+  }
+  .countdown-block .lbl{ font-size:11px; color:var(--ink-soft); margin-top:6px; }
 </style>
 </head>
 <body>
@@ -202,10 +219,6 @@
   <a href="#notes">注意事項</a>
   <a href="#apps">APP</a>
 </nav>
-
-<div style="background:var(--ink); padding:10px 0; text-align:center;">
-  <iframe src="https://tool.lifehacker.tw/countdown/embed?e=2026-11-30T15%3A00%3A00Z&c=E3D19A&l=zh&s=ring&z=m&b=message" width="600" height="170" frameborder="0" scrolling="no" style="border:0; max-width:100%;" title="距離出發倒數"></iframe>
-</div>
 
 <header class="hero">
   <img class="hero-bg desktop-bg" src="https://images.unsplash.com/photo-1676290968796-daf4ea0d8526?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="廣安里海邊">
@@ -222,6 +235,15 @@
     <div class="hero-quote">This is for all my ladies<br>who don't get hyped enough</div>
   </div>
 </header>
+
+<div class="countdown-wrap">
+  <div class="countdown-title">沒有金山銀山，轉頭就到釜山</div>
+  <div class="countdown-blocks" id="countdownBlocks">
+    <div class="countdown-block"><div class="val" id="cdDays">--</div><div class="lbl">天</div></div>
+    <div class="countdown-block"><div class="val" id="cdHours">--</div><div class="lbl">時</div></div>
+    <div class="countdown-block"><div class="val" id="cdMins">--</div><div class="lbl">分</div></div>
+  </div>
+</div>
 
 <div class="band band-cream">
 <section id="hotels">
@@ -581,6 +603,23 @@
 <footer>釜山 12/1–12/6 行程 · 內容持續更新中</footer>
 
 <script>
+  function updateCountdown(){
+    const target = new Date('2026-12-01T08:50:00.000Z'); // 12/1 16:50 台北時間
+    const now = new Date();
+    const diffMs = target - now;
+    if(diffMs <= 0){
+      document.getElementById('countdownBlocks').innerHTML = '<div style="font-family:\'Playfair Display\',serif; font-weight:900; font-size:20px; color:var(--accent-dark);">🎉 出發日到了！</div>';
+      return;
+    }
+    const days = Math.floor(diffMs / 86400000);
+    const hours = Math.floor((diffMs % 86400000) / 3600000);
+    const mins = Math.floor((diffMs % 3600000) / 60000);
+    document.getElementById('cdDays').textContent = String(days).padStart(2,'0');
+    document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cdMins').textContent = String(mins).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 30000);
   document.getElementById('dayTabs').addEventListener('click', function(e){
     if(!e.target.classList.contains('day-tab-btn')) return;
     const day = e.target.getAttribute('data-day');
