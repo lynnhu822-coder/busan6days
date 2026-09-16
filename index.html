@@ -102,6 +102,7 @@
   .hotel-body{ padding:0 4px 4px; flex:1; display:flex; flex-direction:column; }
   .hotel-body h3{ font-size:17px; margin:0 0 6px; font-weight:700; }
   .status{ display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:10px; width:fit-content; }
+  .status.open{ background:#dde8d3; color:var(--accent-dark); }
   .status.check{ background:#f6e4c4; color:#8a5a1f; }
   .status.closed{ background:#f2d9d2; color:var(--accent-dark); }
   .hotel-body p{ font-size:13px; margin:0 0 8px; color:#5c4d38; }
@@ -185,6 +186,13 @@
   .step .txt p{ margin:0; font-size:13px; color:#5c4d38; }
 
   footer{ text-align:center; padding:32px 20px 48px; color:#8a7355; font-family:'Caveat',cursive; font-size:16px; }
+
+  .countdown-bar{
+    background:var(--ink); color:var(--paper);
+    text-align:center; padding:8px 12px; font-size:13px; font-weight:700;
+    letter-spacing:0.02em;
+  }
+  .countdown-bar .num{ font-family:'Caveat',cursive; font-size:19px; color:var(--gold); margin:0 3px; }
 </style>
 </head>
 <body>
@@ -198,6 +206,8 @@
   <a href="#notes">注意事項</a>
   <a href="#apps">APP</a>
 </nav>
+
+<div class="countdown-bar" id="countdownBar">⏰ 計算中...</div>
 
 <header class="hero">
   <img class="hero-bg desktop-bg" src="https://images.unsplash.com/photo-1676290968796-daf4ea0d8526?q=80&w=1744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="廣安里海邊">
@@ -217,40 +227,17 @@
 
 <div class="band band-cream">
 <section id="hotels">
-  <div class="section-head"><div class="tag">Hotel Shortlist</div><h2>飯店候選兩間</h2></div>
-  <div class="carousel">
-    <div class="carousel-track">
-      <div class="carousel-slides" id="hotelSlides">
-        <div class="hotel-card">
-          <div class="img-slot" style="padding:0; background:#000;">
-            <img src="https://pix8.agoda.net/hotelImages/75203921/0/7903b259cd8f0ecc1e9c58436fe5c53d.jpg?ce=2&s=1024x" alt="Gwanganli The Club Hotel" style="width:100%; height:100%; object-fit:cover;">
-          </div>
-          <div class="hotel-body">
-            <span class="status check">待確認房況</span>
-            <h3>Gwanganli The Club Hotel（더클럽호텔）</h3>
-            <p>廣安里在地飯店，先前研究時列在候選名單中，實際房型、價格待查。</p>
-          </div>
-        </div>
-        <div class="hotel-card">
-          <div class="img-slot" style="padding:0; background:#000;">
-            <img src="https://q-xx.bstatic.com/xdata/images/hotel/max500/592868169.jpg?k=4df5c67871970fe3be1ff2defd31398227322b56099f2436c013a0b32d6383e6&o=" alt="BAMU Hotel" style="width:100%; height:100%; object-fit:cover;">
-          </div>
-          <div class="hotel-body">
-            <span class="status check">狀態待確認（見下方說明）</span>
-            <h3>BAMU Hotel</h3>
-            <p>先前查證這間官網訂房功能無法使用；這張照片來自 Booking.com 圖床連結，狀態可能已經改變，需要重新確認房況與訂房管道。</p>
-            <a class="link" href="https://www.bamuhotel.com/en/" target="_blank">官網 ↗</a>
-          </div>
-        </div>
-      </div>
+  <div class="section-head"><div class="tag">Hotel</div><h2>住宿</h2></div>
+  <div class="hotel-card" style="max-width:400px; margin:0 auto;">
+    <div class="img-slot" style="padding:0; background:#000;">
+      <img src="https://pix10.agoda.net/hotelImages/86530886/0/b3186b8bd9dc7077b9cbad044109db18.jpeg?ce=3&s=414x232" alt="釜山四季飯店" style="width:100%; height:100%; object-fit:cover;">
     </div>
-    <div class="carousel-nav">
-      <button class="carousel-btn" onclick="moveHotel(-1)">‹</button>
-      <span class="carousel-count" id="hotelCount">1 / 2</span>
-      <button class="carousel-btn" onclick="moveHotel(1)">›</button>
+    <div class="hotel-body">
+      <span class="status open">已訂房付款・定案</span>
+      <h3>釜山四季飯店（Busan, your season）</h3>
+      <p>已透過JAN訂房並付款，這是最終確定的住宿。5晚總價每人 <strong>11,899 TWD</strong>，平均每人每晚約 2,380 TWD，三人一室。</p>
     </div>
   </div>
-  <p class="budget-note" style="text-align:center;">三間目前都還沒有確認12月份實際房況與價格，出發前建議在 Agoda／Booking 上用韓文原名再查一次。</p>
 </section>
 </div>
 
@@ -357,7 +344,7 @@
   <div class="section-head"><div class="tag">Budget</div><h2>費用參考</h2></div>
   <table>
     <tr><th>項目</th><th>參考金額</th><th>備註</th></tr>
-    <tr><td>住宿</td><td>約 2,000 TWD／人／晚（共6晚）</td><td>三人一室平均分攤，三間候選飯店價格待確認</td></tr>
+    <tr><td>住宿</td><td>約 11,899 TWD／人（5晚總價）</td><td>已訂房付款定案：釜山四季飯店（Busan, your season），平均每人每晚約2,380 TWD，三人一室</td></tr>
     <tr><td>天空膠囊列車</td><td>約 430 TWD／人</td><td>3人共乘一車廂55,000韓元換算，單程尾浦→清沙浦，需另外預約</td></tr>
     <tr><td>松島纜車（水晶車廂）</td><td>約 520 TWD／人</td><td>來回22,000韓元換算，持 Visit Busan Pass 可免費兌換</td></tr>
     <tr><td>汗蒸幕</td><td>約 280–710 TWD／人</td><td>12,000–30,000韓元換算，視選擇小規模或海景大型款而定</td></tr>
@@ -369,7 +356,7 @@
     <tr><td>旅平險</td><td>約 300–600 TWD／人（取中間值450納入總計）</td><td>依保障內容、天數、保額不同，這是一般6天海外旅平險含基本醫療保障的粗抓區間，實際請以投保時的報價為準</td></tr>
   </table>
   <p class="budget-note">以上匯率抓 1 TWD ≈ 42.4 KRW 換算（查詢當下匯率），實際會隨匯率波動有些出入。</p>
-  <div class="totalbar"><span>每人總計</span><b>約 22,500 TWD</b></div>
+  <div class="totalbar"><span>每人總計</span><b>約 22,400 TWD</b></div>
   <p class="budget-note">這是不買 Visit Busan Pass、單項付費的估算（住宿＋膠囊列車＋松島纜車＋汗蒸幕＋Arte Museum＋餐飲＋計程車中間值＋旅平險中間值）；如果改買 BIG3 通行證取代松島纜車等票券，總額會不太一樣，兩者是二選一，不會同時都花。計程車、旅平險都是抓區間中間值，實際會依你們狀況上下浮動；醫美因為變動太大沒有放進來。</p>
 </section>
 </div>
@@ -389,6 +376,7 @@
       <li><a href="https://map.naver.com/p/search/ma%20belle%20mignon%20%EC%84%9C%EC%A0%84%EB%A1%9C" target="_blank">ma belle mignon</a> — 選物・文具/杯盤/襪子（大量漂亮明信片）</li>
       <li><a href="https://map.naver.com/p/search/Love%20is%20Giving%20Heart%20Bear%20%EC%84%9C%EB%A9%B4" target="_blank">Love is Giving Heart Bear（西面店）</a> — 選物・娃娃/磁鐵/文具/掛飾/包包</li>
       <li><a href="https://map.naver.com/p/search/Bracket%20Table%20%EC%A0%84%ED%8F%AC" target="_blank">Bracket Table</a> — 選物・餐具杯盤（서전로68번길，田浦）</li>
+      <li><a href="https://map.naver.com/p/search/%EC%95%BC%ED%82%A4%ED%86%A0%EB%A6%AC%20%EC%98%A8%EC%A0%95%20%EB%B6%80%EC%82%B0%EC%A7%84%EA%B5%AC" target="_blank">야키토리 온정（溫情）</a> — 美食・日式燒鳥居酒屋（釜山鎮區 Dongcheon-ro 108beon-gil 9-7）</li>
       <li><a href="https://map.naver.com/p/search/AVIVERE%20%EC%84%9C%EB%A9%B4" target="_blank">AVIVERE</a> — 選物・化妝包/餐具/服飾/香氛（서면역步行約10分）</li>
       <li><a href="https://map.naver.com/p/search/made%20by%20%EC%84%9C%EB%A9%B4%20%EB%AC%B8%EA%B5%AC" target="_blank">made by</a> — 選物・文創（紙膠帶、貼紙、明信片，서면역步行約5分）</li>
     </ul>
@@ -422,6 +410,7 @@
       <li><a href="https://map.naver.com/p/search/%ED%98%B8%EB%9E%91%EC%9D%B4%EC%A0%A4%EB%9D%BC%EB%96%A1%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank">호랑이젤라떡</a> — 美食・甜點</li>
       <li><a href="https://map.naver.com/p/search/%ED%95%B4%EC%9A%B4%EB%8C%80%EB%AA%85%ED%92%88%ED%98%B8%EB%96%A1" target="_blank">해운대명품호떡</a> — 美食・街頭小吃</li>
       <li><a href="https://map.naver.com/p/search/%EB%AA%A8%EB%AA%A8%EC%8A%A4%EC%BB%A4%ED%94%BC%20%EB%A7%88%EB%A6%B0%EC%8B%9C%ED%8B%B0" target="_blank">MOMOS COFFEE 마린시티점</a> — 咖啡廳（跟Day5影島店不同分店）</li>
+      <li><a href="https://map.naver.com/p/search/%EA%B9%8C%EC%82%AC%20%EB%B6%80%EC%82%AC%EB%85%B8%20%ED%95%B4%EC%9A%B4%EB%8C%80%EC%A0%90" target="_blank">CASA BUSANO 까사 부사노（해운대점）</a> — 咖啡廳・Espresso Bar（早上咖啡、晚上可當酒吧，08:30-凌晨03:00，海雲台站3號出口附近）</li>
     </ul>
       </div>
     </details>
@@ -568,16 +557,25 @@
 </section>
 </div>
 
-<footer>釜山 12/1–12/6 廣安里行程 · 內容持續更新中</footer>
+<footer>釜山 12/1–12/6 行程 · 內容持續更新中</footer>
 
 <script>
-  let hotelIndex = 0;
-  const hotelTotal = 2;
-  function moveHotel(dir){
-    hotelIndex = (hotelIndex + dir + hotelTotal) % hotelTotal;
-    document.getElementById('hotelSlides').style.transform = `translateX(-${hotelIndex * 100}%)`;
-    document.getElementById('hotelCount').textContent = `${hotelIndex + 1} / ${hotelTotal}`;
+  function updateCountdown(){
+    const target = new Date('2026-12-01T00:00:00+09:00');
+    const now = new Date();
+    const diffMs = target - now;
+    const bar = document.getElementById('countdownBar');
+    if(diffMs <= 0){
+      bar.innerHTML = '🎉 出發日到了，玩得開心！';
+      return;
+    }
+    const days = Math.floor(diffMs / 86400000);
+    const hours = Math.floor((diffMs % 86400000) / 3600000);
+    bar.innerHTML = `⏰ 距離出發還有 <span class="num">${days}</span> 天 <span class="num">${hours}</span> 小時`;
   }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+</script>
   document.getElementById('dayTabs').addEventListener('click', function(e){
     if(!e.target.classList.contains('day-tab-btn')) return;
     const day = e.target.getAttribute('data-day');
